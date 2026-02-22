@@ -1,0 +1,11 @@
+feature,importance
+borrower_credit_score,0.28350148
+fico_x_unemployment,0.19351876
+has_mortgage_insurance,0.1079772
+original_ltv,0.10645404
+original_loan_term,0.09891356
+dti,0.057637233
+has_coborrower,0.053799007
+is_cashout_refi,0.04996557
+original_interest_rate,0.035497464
+original_cltv,0.012735756

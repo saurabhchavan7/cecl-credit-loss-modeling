@@ -1,0 +1,14 @@
+feature,iv,interpretation
+borrower_credit_score,0.6016971873441338,Suspicious
+fico_x_unemployment,0.5768499886239338,Suspicious
+original_ltv,0.19807185074512476,Medium
+original_cltv,0.167677750633245,Medium
+original_interest_rate,0.14820935628507947,Medium
+dti,0.12716821703107237,Medium
+original_loan_term,0.11341503841254369,Medium
+has_mortgage_insurance,0.056711952293666906,Weak
+is_cashout_refi,0.036392800900078945,Weak
+has_coborrower,0.03554469967982835,Weak
+hpi_national,0.01947473687689017,Not useful
+fed_funds_rate,0.019416872504440616,Not useful
+gdp_growth_pct,0.017827679213233857,Not useful

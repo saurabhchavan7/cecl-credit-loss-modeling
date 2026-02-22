@@ -1,0 +1,13 @@
+original_ltv
+original_cltv
+has_mortgage_insurance
+borrower_credit_score
+dti
+original_interest_rate
+original_upb
+loan_age_at_default
+was_modified
+is_investment_property
+is_condo
+unemployment_rate
+hpi_national

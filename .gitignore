@@ -41,3 +41,39 @@ mlruns/
 .streamlit/secrets.toml
 
 document_bin
+
+# ---- Data (too large for GitHub) ----
+data/
+
+# ---- Large model artifacts (exclude from GitHub) ----
+models/*.pkl
+models/*.parquet
+
+# ---- Small CSVs in models/ ARE included (not ignored) ----
+# These power the dashboard on Streamlit Cloud:
+#   models/*.csv
+#   models/*.txt
+
+# ---- Python ----
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+
+# ---- Environment ----
+.env
+
+# ---- IDE ----
+.vscode/
+.idea/
+*.swp
+
+# ---- OS ----
+.DS_Store
+Thumbs.db
+
+# ---- MLflow ----
+mlruns/
+
+# ---- Jupyter ----
+.ipynb_checkpoints/

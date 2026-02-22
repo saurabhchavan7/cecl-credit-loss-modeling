@@ -1,0 +1,10 @@
+borrower_credit_score
+fico_x_unemployment
+original_ltv
+original_cltv
+original_interest_rate
+dti
+original_loan_term
+has_mortgage_insurance
+is_cashout_refi
+has_coborrower

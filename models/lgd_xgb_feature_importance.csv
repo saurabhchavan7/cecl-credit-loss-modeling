@@ -1,0 +1,14 @@
+feature,importance
+original_upb,0.30209085
+is_investment_property,0.18732303
+original_ltv,0.14058527
+original_interest_rate,0.067482494
+loan_age_at_default,0.06478215
+original_cltv,0.06443598
+has_mortgage_insurance,0.04410164
+unemployment_rate,0.036466286
+hpi_national,0.025306774
+is_condo,0.023159763
+borrower_credit_score,0.01791586
+was_modified,0.016666733
+dti,0.009683237

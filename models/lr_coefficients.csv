@@ -1,0 +1,11 @@
+feature,coefficient
+original_loan_term_woe,-1.062388584720806
+is_cashout_refi_woe,-0.9017620253746627
+has_coborrower_woe,-0.8654050802601172
+dti_woe,-0.730594395041185
+has_mortgage_insurance_woe,-0.6964738954089446
+original_interest_rate_woe,-0.6582157550823848
+borrower_credit_score_woe,-0.5494307205172553
+fico_x_unemployment_woe,-0.48277327183652413
+original_ltv_woe,-0.4194099182282433
+original_cltv_woe,-0.40097100904506683
