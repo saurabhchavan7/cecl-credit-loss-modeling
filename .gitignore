@@ -1,0 +1,43 @@
+# Raw and processed data files (too large for GitHub)
+data/raw/
+data/processed/
+data/macro/
+data/scenarios/
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Environment
+.env
+.venv/
+env/
+venv/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Model artifacts (large binary files)
+models/*.pkl
+models/*.joblib
+
+# MLflow
+mlruns/
+
+# Streamlit
+.streamlit/secrets.toml
+
+document_bin
