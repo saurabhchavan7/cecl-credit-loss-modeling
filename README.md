@@ -4,6 +4,10 @@ An end-to-end credit risk modeling framework implementing CECL (Current Expected
 
 Built to demonstrate proficiency in quantitative credit risk analysis, model development, validation, and governance for financial institutions.
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://cecl-credit-loss-modeling.streamlit.app)
+
+> **[Live Dashboard](https://cecl-credit-loss-modeling.streamlit.app)** | **[Model Documentation](docs/model_documentation.md)**
+
 ---
 
 ## Business Context
@@ -13,6 +17,10 @@ Banks must estimate **lifetime expected losses** from day one of every loan unde
 1. **How much should we reserve?** Scenario-weighted ECL = $158B (22.8% of portfolio)
 2. **Can we survive a recession?** Severely adverse losses = $312B over 13 quarters
 3. **What is our tail risk?** VaR 99.9% = $99B from 10,000 Monte Carlo simulations
+
+## Architecture
+
+![Architecture Diagram](docs/architecture.svg)
 
 ## Key Results
 
@@ -29,7 +37,7 @@ Banks must estimate **lifetime expected losses** from day one of every loan unde
 | Monte Carlo VaR 99.9% | $99,208M (14.30%) |
 | Monte Carlo ES 99% | $89,071M (12.84%) |
 
-## Architecture
+## Architecture Details
 
 ```
 Expected Credit Loss = PD x LGD x EAD
@@ -71,42 +79,18 @@ Monte Carlo Simulation
 
 **Infrastructure:** Parquet columnar storage, chunked processing (500K rows), memory-optimized pipeline for 8-16GB RAM constraint
 
-## Project Structure
+## Dashboard
 
-```
-cecl-credit-loss-modeling/
-  src/
-    data_pipeline.py          Raw Fannie Mae data ingestion (Phase 1)
-    feature_engine.py         Loan-level feature engineering (Phase 2)
-    pd_model.py               WoE/IV, logistic regression, XGBoost (Phase 3)
-    run_pd_model.py           Full PD training pipeline
-    lgd_model.py              OLS and XGBoost LGD models (Phase 4)
-    run_lgd_model.py          Full LGD training pipeline
-    ecl_engine.py             EAD amortization + lifetime ECL (Phases 5-6)
-    run_ecl.py                Portfolio ECL calculation
-    stress_testing.py         Fed scenario stress testing (Phase 7)
-    run_stress_test.py        Stress test pipeline
-    monte_carlo.py            Correlated MC simulation (Phase 8)
-    run_monte_carlo.py        Monte Carlo pipeline
-    generate_dashboard_data.py  Create deployment-ready summary CSVs
-  models/                     Trained models (.pkl) and result CSVs
-  dashboard/
-    app.py                    Streamlit dashboard entry point
-    utils.py                  Shared chart styling and helpers
-    views/                    6 dashboard pages
-  docs/
-    model_documentation.md    model governance document
-  data/                       Raw and processed data (not in repo)
-```
+**[Live Demo: cecl-credit-loss-modeling.streamlit.app](https://cecl-credit-loss-modeling.streamlit.app)**
 
-## Dashboard Pages
-
-1. **Portfolio Overview** -- KPI cards, composition charts, ECL summary, production context
-2. **PD Model** -- AUC/KS comparison, calibration analysis, Information Value, coefficients, methodology rationale
-3. **LGD Model** -- R-squared comparison, OLS coefficients, segment analysis, methodology
-4. **Stress Testing** -- Fed scenario quarterly loss path, custom scenario builder with interactive sliders, methodology
-5. **Monte Carlo** -- Loss distribution histogram with VaR/ES markers, sensitivity tornado chart, 10K scenario explorer
-6. **Loan Scorer** -- Real-time single-loan scoring with PD, LGD, ECL, and risk rating output
+| Page | What It Shows |
+|---|---|
+| **Portfolio Overview** | KPI cards, FICO/LTV/vintage composition, ECL summary, production deployment context |
+| **PD Model** | Primary vs challenger AUC/KS comparison, calibration by decile, Information Value ranking, logistic regression coefficients, methodology rationale |
+| **LGD Model** | OLS vs XGBoost R-squared comparison, coefficient interpretation, segment analysis by FICO and LTV, LGD calculation methodology |
+| **Stress Testing** | Fed 2025 quarterly loss path with cumulative view, stress multiplier visualization, custom scenario builder with interactive sliders for unemployment/HPI/GDP |
+| **Monte Carlo** | 10,000-simulation loss distribution histogram with VaR/ES markers, sensitivity tornado chart identifying dominant risk drivers, correlated scenario scatter plot |
+| **Loan Scorer** | Production scoring simulation: input borrower FICO, LTV, DTI, loan amount, property value, and macro conditions to get real-time PD, LGD, lifetime ECL, and internal risk rating (1-10 scale) |
 
 ## Methodology Highlights
 
@@ -120,6 +104,48 @@ cecl-credit-loss-modeling/
 
 **Model Limitations Documented:** AUC below 0.75 target, PSI=0.29 indicating population shift, no geographic concentration risk, static portfolio assumption, linear stress multipliers. Full limitations analysis in model documentation.
 
+## Deployment
+
+The dashboard is deployed on **Streamlit Cloud**. Due to GitHub file size limits (100MB), trained model artifacts (`.pkl` files, `.parquet` loan-level data) are excluded from the repository. The dashboard uses pre-computed summary CSVs for all visualizations. The Loan Scorer uses simplified scoring formulas in the deployed version; locally with full model artifacts, it scores through the actual trained logistic regression and OLS models.
+
+## Future Enhancements
+
+| Enhancement | Description |
+|---|---|
+| Geographic risk | State-level unemployment and HPI to capture concentration risk |
+| Dynamic LGD | Time-varying LGD based on loan seasoning and current LTV |
+| Non-linear stress | Piece-wise polynomial multipliers for extreme scenarios |
+| Retraining pipeline | MLflow tracking with PSI > 0.25 and calibration drift triggers |
+| API endpoint | FastAPI wrapper for real-time scoring in production systems |
+
+## Project Structure
+
+```
+cecl-credit-loss-modeling/
+  src/
+    data_pipeline.py            Raw Fannie Mae data ingestion (Phase 1)
+    feature_engine.py           Loan-level feature engineering (Phase 2)
+    pd_model.py                 WoE/IV, logistic regression, XGBoost (Phase 3)
+    run_pd_model.py             Full PD training pipeline
+    lgd_model.py                OLS and XGBoost LGD models (Phase 4)
+    run_lgd_model.py            Full LGD training pipeline
+    ecl_engine.py               EAD amortization + lifetime ECL (Phases 5-6)
+    run_ecl.py                  Portfolio ECL calculation
+    stress_testing.py           Fed scenario stress testing (Phase 7)
+    run_stress_test.py          Stress test pipeline
+    monte_carlo.py              Correlated MC simulation (Phase 8)
+    run_monte_carlo.py          Monte Carlo pipeline
+    generate_dashboard_data.py  Summary CSVs for deployment
+  models/                       Model artifacts and result CSVs
+  dashboard/
+    app.py                      Streamlit dashboard entry point
+    utils.py                    Shared chart styling
+    views/                      6 dashboard pages
+  docs/
+    model_documentation.md      Model governance document
+    architecture.png            Architecture diagram
+  data/                         Raw and processed data (not in repo)
+```
 
 ## Model Documentation
 
