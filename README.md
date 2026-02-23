@@ -6,7 +6,7 @@ Built to demonstrate proficiency in quantitative credit risk analysis, model dev
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://cecl-credit-loss-modeling.streamlit.app)
 
-> **[Live Dashboard](https://cecl-credit-loss-modeling.streamlit.app)** | **[Model Documentation](docs/model_documentation.md)**
+> **[Live Dashboard](https://cecl-credit-loss-modeling.streamlit.app)** | **[Framework Overview (Video)](https://youtu.be/qORtDigZkz0)** | **[Model Documentation](docs/model_documentation.md)**
 
 ---
 
@@ -20,7 +20,7 @@ Banks must estimate **lifetime expected losses** from day one of every loan unde
 
 ## Architecture
 
-![Architecture Diagram](docs/architecture.svg)
+![Architecture Diagram](docs/architecture.SVG)
 
 ## Key Results
 
