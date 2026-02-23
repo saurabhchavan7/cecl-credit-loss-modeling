@@ -20,7 +20,7 @@ Banks must estimate **lifetime expected losses** from day one of every loan unde
 
 ## Architecture
 
-![Architecture Diagram](docs/architecture.SVG)
+![Architecture Diagram](docs/architecture.svg)
 
 ## Key Results
 
